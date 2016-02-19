@@ -47,11 +47,9 @@ class StarCityScraper
     sideboard = false
     card_list.each do |card|
       sum += card[:number]
-      if sideboard == false && sum >= 60
-        sideboard = true
+      deck << "#{card[:number]} #{card[:name]}"
+      if sum == 60
         deck << ""
-      else
-        deck << "#{card[:number]} #{card[:name]}"
       end
     end
     deck
@@ -69,4 +67,5 @@ puts 'Enter a URL: '
 url = gets.chomp
 puts 'Enter a filepath: '
 ouput = gets.chomp
+output = ouput == "" ? nil : output
 StarCityScraper.new(url, ouput).scrape
